@@ -1,0 +1,59 @@
+﻿@model NissanSystem.HelperCode.UserLoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Mena Used Cars - Login</title>
+    <link href="~/css/ForLogin/all.min.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS-->
+    <link href="~/css/ForLogin/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom styles for this template-->
+    <link href="~/css/ForLogin/sb-admin.css" rel="stylesheet" />
+</head>
+<body class="bg-dark">
+    <form asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+        <div class="container">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">Login - Please enter your credentials</div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input asp-for="UserName" class="form-control" placeholder="Username" required autofocus="autofocus" autocomplete="username" />
+                            <label asp-for="UserName">Username</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <input type="password" asp-for="Password" class="form-control" placeholder="Password" required autocomplete="current-password" />
+                            <label asp-for="Password">Password</label>
+                        </div>
+                    </div>
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="RememberMe" checked="checked" />
+                            Remember Password
+                        </label>
+                    </div>
+                    <button id="btnSubmit" class="btn btn-primary btn-block"> Login</button>
+
+                    @* <div asp-validation-summary="ModelOnly" class="alert alert-danger help-block small mt-3"></div>*@
+                    @if (ViewData.ContainsKey("ModelState"))
+                    {
+                        <div class="text-center">
+                            <label id="lblError" class="alert alert-danger d-block small mt-3">@Html.Raw(ViewData["ModelState"]) </label>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

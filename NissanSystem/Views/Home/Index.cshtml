@@ -1,0 +1,176 @@
+﻿@{
+    ViewData["Title"] = "Manage Cars";
+}
+
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="~/lib/dataTable/editor.dataTables.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/lib/select2/css/select2.min.css" />
+    <link type="text/css" href="~/lib/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+}
+<main role="main" class="container-fluid">
+    <div class="card border-primary mb-3">
+        <div class="card-header bg-primary">
+            <h5 class="text-white mb-0" data-toggle="collapse" data-target="#collapse_ManageCars">
+                <i class="fa" aria-hidden="true"></i>
+                Manage Cars
+            </h5>
+        </div>
+        <div id="collapse_ManageCars" class="collapse show">
+            <div class="card-body">
+                <div class="row">
+                    <div style="width: 100%">
+                        <table id="tblReport" class="table table-striped table-bordered collapsed no-footer dataTable tblReport" style="width: 100%"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- add new Car -->
+    <div class="modal" id="NewCarModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated fadeIn">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New Car</h4>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Type</label>
+                                <input type="text" id="txtCarType" class="form-control" placeholder="Car Type" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Production Year</label>
+                                <input type="text" id="txtProductionYear" class="form-control" placeholder="Production Year" />
+                            </div>
+                        </div>
+                        @*<div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Opened For All Users</label>
+                                    <input type="checkbox" id="chkOpenedForAllUsers" class="form-control" value="1" style="height: 25px;" />
+                                </div>
+                            </div>*@
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Plate Number</label>
+                                <input type="text" id="txtCarNumber" class="form-control" placeholder="Car Number" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Valid License </label>
+                                <input type="text" id="txtValidLicense" class="form-control" placeholder="Valid License" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Valid Insurance</label>
+                                <input type="text" id="txtValidInsurance" class="form-control" placeholder="Valid Insurance" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Location</label>
+                                <input type="text" id="txtCarLocation" class="form-control" placeholder="Car Location" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Counter</label>
+                                <input type="text" id="txtCarCounter" class="form-control" placeholder="Car Counter" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Car Notes</label>
+                                <input type="text" id="txtCarNotes" class="form-control" placeholder="Car Notes" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Notes</label>
+                                <input type="text" id="txtGeneralNotes" class="form-control" placeholder="General Notes" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Agency</label>
+                                <input type="text" id="Agency" class="form-control" placeholder="Agency" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <button id="btn-upload-photo1">Upload Photo 1</button>
+                                <input id="input-upload-photo1" type="file" name="input-upload-photo1" onchange="uploadPhoto(this,1)" style="display: none;" accept="image/png, image/jpeg, image/jpeg, image/gif" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <button id="btn-upload-photo2">Upload Photo 2</button>
+                                <input id="input-upload-photo2" type="file" name="input-upload-photo2" onchange="uploadPhoto(this,2)" style="display: none;" accept="image/png, image/jpeg, image/jpeg, image/gif" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <button id="btn-upload-photo3">Upload Photo 3</button>
+                                <input id="input-upload-photo3" type="file" name="input-upload-photo3" onchange="uploadPhoto(this,3)" style="display: none;" accept="image/png, image/jpeg, image/jpeg, image/gif" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <button id="btn-upload-photo4">Upload Photo 4</button>
+                                <input id="input-upload-photo4" type="file" name="input-upload-photo4" onchange="uploadPhoto(this,4)" style="display: none;" accept="image/png, image/jpeg, image/jpeg, image/gif" />
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-top: 15px;">
+                            <div class="col-sm-11">
+                                <div class="form-group">
+                                    <label>Group Owner</label>
+                                    <select id="ddlGroupOwners" class="form-control-sm form-control input-s-sm inline select2-dropdown ddlGroupOwners" multiple="multiple" data-close-on-select="false">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-danger float-left" data-dismiss="modal">Close</button>
+                    <button id="btnAddCar" class="btn btn-sm btn-info float-right" type="button">
+                        <span class="fa fa-plus" aria-hidden="true"></span>
+                        Add Car
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+@section Scripts{
+    <script type="text/javascript" src="~/lib/dataTable/dataTables.editor.min.js"></script>
+    <script type="text/javascript" src="~/lib/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="~/js/ManageCars.js"></script>
+}
+
+
