@@ -90,7 +90,7 @@ function GetTableColumnsDefinition() {
         },
 
         {
-            'data': 'Photo1',
+            'data': null,
             title: 'Photos',
             editable: false,
             render: function (data, type, row, meta) {
@@ -98,9 +98,7 @@ function GetTableColumnsDefinition() {
                     return data;
                 if (type === 'display') {
                     return `<a class="fa fa-info-circle" data-toggle="tooltip" title="<img src='/Uploaded_photos/${row.Photo1}' width='500' height='500'/>" alt="Photo No 1"/></a>
-                            <span></span>
                             <a class="fa fa-info-circle" data-toggle="tooltip" title="<img src='/Uploaded_photos/${row.Photo2}' width='500' height='500'/>" alt="Photo No 2"/></a>
-                            <span></span>
                             <a class="fa fa-info-circle" data-toggle="tooltip" title="<img src='/Uploaded_photos/${row.Photo3}' width='500' height='500'/>" alt="Photo No 3"/></a>
                             <a class="fa fa-info-circle" data-toggle="tooltip" title="<img src='/Uploaded_photos/${row.Photo4}' width='500' height='500'/>" alt="Photo No 4"/></a>
                            `
@@ -160,47 +158,6 @@ function GetTableColumnsDefinition() {
     ];
     return columns;
 }// end function GetTableColumnsDefinition
-
-
-function GetOperators() {
-    console.log('Loading operators...');
-    $.ajax({
-        "autoWidth": false,
-        type: "GET",
-        url: "/si_groups/GetOperators",
-        contentType: "application/json; charset=utf-8",
-        async: false,
-        dataType: "json",
-        success: function (result) {
-            // parse results
-            Operators = result.map(function (item) {
-                return {
-                    value: item.Id,
-                    label: item.TDesc
-                };
-            });
-            // add operator options
-            Operators.forEach(function (e, i) {
-                var operatorOption = $('<option />', {
-                    value: e.value,
-                    text: e.label
-                });
-                $('#ddlGroupOwners').append(operatorOption);
-            });
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.log("jqXHR", jqXHR);
-            console.log("textStatus", textStatus);
-            console.log("errorThrown", errorThrown);
-            console.log("responseText", jqXHR.responseText);
-            showAlert('Failed to receive Operators.\nPlease try again or contact Si-Web Team.\n', true);
-        },
-        complete: function (jqXHR, textStatus) {
-            console.log('Loading Operators List... Done');
-        }
-
-    });
-}// end function GetOperators
 
 function createSearchTable() {
     if (table !== null) {
@@ -273,7 +230,7 @@ function createSearchTable() {
                 [10, 25, 50, 100, 200, 500, 1000, 2000] // text
             ],
             rowCallback: function (row, data) {
-                // $(row).attr('data-id', data.ID);
+
             },
             iDisplayLength: 50,
             buttons: [
@@ -297,10 +254,7 @@ function createSearchTable() {
                 },
             ],
             initComplete: function (settings, json) {
-                $('a[data-toggle="tooltip"]').tooltip({
-                    placement: 'left',
-                    html: true
-                });
+             
             }
         });// end DataTable
 
@@ -650,6 +604,10 @@ $(document).ready(function () {
     });
 
     createSearchTable();
-
+    $('body').tooltip({
+        selector: '.fa-info-circle',
+        placement: 'left',
+        html: true
+    });
 });// end $(document).ready
 
