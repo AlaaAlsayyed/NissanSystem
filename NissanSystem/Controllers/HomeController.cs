@@ -40,16 +40,6 @@ namespace NissanSystem.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-        //[HttpGet]
-        //[ActionName("GetOperators")]
-        //public IQueryable GetOperators()
-        //{
-
-        //    return (from o in db.Tbloperators
-        //            orderby o.TDesc
-        //            select new { o.Id, o.TDesc });
-        //}
         [HttpPost]
         [ActionName("AddCar")]
         public APIResponse AddCar([FromBody] CarInfo carInfo)

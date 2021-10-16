@@ -1,0 +1,45 @@
+USE [NissanSystemDB]
+GO
+/****** Object:  Table [dbo].[CarInfo]    Script Date: 10/5/2021 12:08:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CarInfo](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CarType] [nvarchar](max) NULL,
+	[ProductionYear] [nvarchar](max) NULL,
+	[CarNumber] [nvarchar](max) NULL,
+	[ValidLicense] [nvarchar](max) NULL,
+	[ValidInsurance] [nvarchar](max) NULL,
+	[CarLocation] [nvarchar](max) NULL,
+	[CarCounter] [nvarchar](max) NULL,
+	[CarNotes] [nvarchar](max) NULL,
+	[GeneralNotes] [nvarchar](max) NULL,
+	[Agency] [nvarchar](max) NULL,
+	[IsVisible] [int] NULL,
+	[Photo1] [nvarchar](max) NULL,
+	[Photo2] [nvarchar](max) NULL,
+	[Photo3] [nvarchar](max) NULL,
+	[Photo4] [nvarchar](max) NULL,
+ CONSTRAINT [PK_CarNumber] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[User]    Script Date: 10/5/2021 12:08:08 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[User](
+	[Id] [int] NOT NULL,
+	[UserName] [nvarchar](max) NOT NULL,
+	[Password] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
